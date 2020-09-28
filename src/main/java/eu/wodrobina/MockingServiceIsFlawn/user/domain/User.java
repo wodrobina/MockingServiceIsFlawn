@@ -2,10 +2,7 @@ package eu.wodrobina.MockingServiceIsFlawn.user.domain;
 
 import eu.wodrobina.MockingServiceIsFlawn.user.dto.UserDto;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.util.function.Function;
 
 @Entity
@@ -15,10 +12,17 @@ class User {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
 
+    @Embedded
+    private Password password;
+
     private String name;
 
-
     protected User() {
+    }
+
+    public User(Password password, String name) {
+        this.password = password;
+        this.name = name;
     }
 
     public User(String name) {
